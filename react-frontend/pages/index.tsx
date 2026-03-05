@@ -3,6 +3,8 @@ import { useState } from "react";
 const UploadImages = () => {
   const [images, setImages] = useState([]);
   const [uploadedImages, setUploadedImages] = useState([]);
+  const [albumName, setAlbumName] = useState("");
+  const [albumDescription, setAlbumDescription] = useState("");
 
   const Upload = async () => {
     if (images.length === 0) {
@@ -10,10 +12,12 @@ const UploadImages = () => {
       return;
     }
     const imgData = new FormData();
+    imgData.append("albumName", albumName);
+    imgData.append("albumDescription", albumDescription);
     images.forEach((img) => {
       imgData.append("images", img);
     });
-    console.log("imgData", imgData);
+
     const response = await axios.post(
       "http://localhost:3002/uploads",
       imgData,
@@ -31,6 +35,18 @@ const UploadImages = () => {
     <div>
       <h3>Add photos</h3>
       <input type="file" multiple onChange={handleImages} />
+      <input
+        type="text"
+        placeholder="Albumo pavadinimas"
+        value={albumName}
+        onChange={(e) => setAlbumName(e.target.value)}
+      />
+
+      <textarea
+        placeholder="Albumo aprašymas"
+        value={albumDescription}
+        onChange={(e) => setAlbumDescription(e.target.value)}
+      />
       <button onClick={Upload}>Ikelti</button>
     </div>
   );

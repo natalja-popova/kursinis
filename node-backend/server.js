@@ -1,5 +1,6 @@
 import "dotenv/config";
 import express from "express";
+import fs from "fs";
 import multer from "multer";
 import cors from "cors";
 
@@ -11,7 +12,16 @@ app.use("/gallery", express.static("gallery"));
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "gallery/");
+    console.log("req.body=", req.body);
+    const customFolder = req.body.albumName;
+    console.log("customFolder=", customFolder);
+    const folder = `gallery/${customFolder}`;
+
+    if (!fs.existsSync(folder)) {
+      fs.mkdirSync(folder, { recursive: true });
+    }
+
+    cb(null, folder);
   },
   filename: (req, file, cb) => {
     cb(null, file.originalname);
@@ -19,16 +29,19 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage });
+
 app.get("/test", (req, res) => {
   console.log("test");
   return res.send("aaa");
 });
+
 app.post("/uploads", upload.array("images"), (req, res) => {
-  console.log("req=", req, "upload.array('images')=", upload.array("images"));
   if (!req.files || req.files.length === 0) {
     return res.status(500).json({ error: "Nepavyko ikelti nuotrauku" });
   }
-  const paths = req.files.map((file) => `/gallery/${file.filename}`);
+  const paths = req.files.map(
+    (file) => `/gallery/${req.body.albumName}/${file.filename}`,
+  );
   res.json({ paths });
 });
 
