@@ -1,0 +1,80 @@
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { useRouter } from "next/router";
+import { API_BASE_URL } from "@/config";
+import style from "./form.module.css";
+import { validateJwt } from "@/services/authService";
+
+const LoginPage = () => {
+  const [userEmail, setUserEmail] = useState("");
+  const [userPsw, setUserPsw] = useState("");
+  const [errorMsg, setErrMsg] = useState("");
+  const [disableButton, setDisableButton] = useState(false);
+  const router = useRouter();
+
+  const login = async () => {
+    if (!userEmail || !userPsw) {
+      setErrMsg("Visi laukai turi būti užpildyti!");
+      return;
+    }
+
+    const userData = {
+      email: userEmail,
+      password: userPsw,
+    };
+
+    try {
+      const response = await axios.post(`${API_BASE_URL}/admin`, {
+        ...userData,
+      });
+    } catch (err: any) {
+      if (err.response) {
+        setErrMsg(err.response.data.message);
+      } else if (err.request) {
+        setErrMsg("Serveris neatsako.");
+      } else {
+        setErrMsg("Įvyko klaida.");
+      }
+    } finally {
+      setDisableButton(false);
+    }
+  };
+  useEffect(() => {
+    const run = async () => {
+      const isValid = await validateJwt();
+
+      if (isValid) {
+        router.push("/admin/gallery");
+        return;
+      }
+    };
+    run();
+  }, []);
+  return (
+    <div className={style.formWrapper}>
+      <h1>Login</h1>
+      <input
+        type="text"
+        value={userEmail}
+        onChange={(e) => {
+          setUserEmail(e.target.value);
+        }}
+        placeholder="El.pastas"
+      />
+      <input
+        type="password"
+        value={userPsw}
+        onChange={(e) => {
+          setUserPsw(e.target.value);
+        }}
+        placeholder="Iveskite slaptazodi"
+      />
+      {errorMsg && <p className={style.error}>{errorMsg}</p>}
+      <button onClick={login} disabled={disableButton}>
+        Prisijungti
+      </button>
+    </div>
+  );
+};
+
+export default LoginPage;

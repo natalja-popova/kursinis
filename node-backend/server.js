@@ -3,18 +3,26 @@ import express from "express";
 import fs from "fs";
 import multer from "multer";
 import cors from "cors";
+import mongoose from "mongoose";
+import AdminRouter from "./src/router/admin.js";
+import GalleryRouter from "./src/router/gallery.js";
 
 const app = express();
-
+app.use(express.json());
 app.use(cors());
+
+mongoose
+  .connect(process.env.MONGO_DB_CONNECTION)
+  .then(() => console.log("Connected to DB"))
+  .catch((err) => {
+    console.log(err);
+  });
 
 app.use("/gallery", express.static("gallery"));
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    console.log("req.body=", req.body);
     const customFolder = req.body.albumName;
-    console.log("customFolder=", customFolder);
     const folder = `gallery/${customFolder}`;
 
     if (!fs.existsSync(folder)) {
@@ -30,10 +38,8 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-app.get("/test", (req, res) => {
-  console.log("test");
-  return res.send("aaa");
-});
+app.use(AdminRouter);
+app.use(GalleryRouter);
 
 app.post("/uploads", upload.array("images"), (req, res) => {
   if (!req.files || req.files.length === 0) {

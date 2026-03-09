@@ -1,55 +1,102 @@
-import axios from "axios";
-import { useState } from "react";
-const UploadImages = () => {
-  const [images, setImages] = useState([]);
-  const [uploadedImages, setUploadedImages] = useState([]);
-  const [albumName, setAlbumName] = useState("");
-  const [albumDescription, setAlbumDescription] = useState("");
+import Image from "next/image";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import style from "./index.module.css";
 
-  const Upload = async () => {
-    if (images.length === 0) {
-      alert("Pasirinkit bent vieną nuotrauką");
-      return;
-    }
-    const imgData = new FormData();
-    imgData.append("albumName", albumName);
-    imgData.append("albumDescription", albumDescription);
-    images.forEach((img) => {
-      imgData.append("images", img);
-    });
+const images = [
+  { url: "/imgSlider/Bacground-photo1.jpg" },
+  { url: "/imgSlider/Bacground-photo2.jpg" },
+  { url: "/imgSlider/Bacground-photo3.jpg" },
+  { url: "/imgSlider/Bacground-photo5.jpg" },
+  { url: "/imgSlider/Bacground-photo6.jpg" },
+  { url: "/imgSlider/Bacground-photo7.jpg" },
+];
 
-    const response = await axios.post(
-      "http://localhost:3002/uploads",
-      imgData,
-      {
-        headers: { "Content-Type": "multipart/form-data" },
-      },
-    );
-    console.log(response.data);
-  };
+const HomePage = () => {
+  const [bg] = useState(() => {
+    return images[Math.floor(Math.random() * images.length)];
+  });
+  const [isMobileMenuOpen, setMobileMenuStatus] = useState(false);
+  const navLinks = [
+    { url: "/", linkText: "APIE MUS", linkTitle: "Apie mus" },
+    { url: "/", linkText: "MOKYMAI", linkTitle: "Mokymai" },
+    { url: "/", linkText: "GALERIJA", linkTitle: "Galerija" },
+    { url: "/", linkText: "KONTAKTAI", linkTitle: "Kontaktai" },
+  ];
 
-  const handleImages = (e) => {
-    setImages(Array.from(e.target.files));
-  };
   return (
-    <div>
-      <h3>Add photos</h3>
-      <input type="file" multiple onChange={handleImages} />
-      <input
-        type="text"
-        placeholder="Albumo pavadinimas"
-        value={albumName}
-        onChange={(e) => setAlbumName(e.target.value)}
-      />
+    <div
+      className={style.homePage}
+      style={{ backgroundImage: `url(${bg.url})` }}
+    >
+      <header className={style.header}>
+        <Link className={style.brandWrapper} href="/">
+          <>
+            <img className={style.logo} src="/images/akvanautas_logo.png" />
+            <h1>POVANDENINIO NARDYMO KLUBAS</h1>
+          </>
+        </Link>
+        <nav>
+          <ul>
+            {navLinks.map((link) => (
+              <li key={link.linkTitle}>
+                <Link href={`${link.url}`} title={link.linkTitle}>
+                  {link.linkText}
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <img
+            onClick={() => setMobileMenuStatus(!isMobileMenuOpen)}
+            className={style.menuMobile}
+            src="/images/menu-ico.svg"
+            alt="Mobile Menu"
+          />
+        </nav>
+      </header>
+      <div
+        className={`${style.overlay} ${isMobileMenuOpen ? style.overlayPosition : style.overlayPositionHidden}`}
+      >
+        <nav>
+          <ul>
+            {navLinks.map((link) => (
+              <li key={link.linkTitle}>
+                <Link href={`${link.url}`} title={link.linkTitle}>
+                  {link.linkText}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </div>
+      <main className={style.heroBanner}>
+        <h3>
+          Mūsų sertifikuoti nardymo kursai ir patyrusių instruktorių komanda
+          pirmuosius įkvėpimus po vandeniu paverčia ilgalaike aistra ir saugiais
+          nuotykiais visame pasaulyje.
+        </h3>
 
-      <textarea
-        placeholder="Albumo aprašymas"
-        value={albumDescription}
-        onChange={(e) => setAlbumDescription(e.target.value)}
-      />
-      <button onClick={Upload}>Ikelti</button>
+        <h2>
+          Atrask krištolo skaidrumo rifus, įspūdingą povandeninį pasaulį ir
+          keliones, kurios įkvepia.
+        </h2>
+      </main>
+
+      <footer className={style.footer}>
+        <nav>
+          <ul>
+            {navLinks.map((link) => (
+              <li key={link.linkTitle}>
+                <Link href={`${link.url}`} title={link.linkTitle}>
+                  {link.linkText}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </footer>
     </div>
   );
 };
 
-export default UploadImages;
+export default HomePage;

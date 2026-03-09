@@ -1,0 +1,85 @@
+.header {
+  height: 140px;
+  background-color: var(--header-background);
+  width: 100vw;
+  position: absolute;
+  top: 0;
+  z-index: 99999;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    li a {
+      color: var(--text-color-secondary);
+    }
+    li a:hover {
+      color: var(--text-color-main);
+    }
+  }
+  h1 {
+    color: var(--text-color-secondary);
+    margin-bottom: 16px;
+  }
+}
+.logo {
+  padding-top: 35px;
+  margin-right: 50px;
+}
+.footer {
+  width: 100vw;
+  height: 70px;
+  position: absolute;
+  bottom: 0;
+  background-color: var(--header-background);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    li a {
+      color: var(--text-color-secondary);
+    }
+    li a:hover {
+      color: var(--text-color-main);
+    }
+  }
+}
+
+:global(.rsis-container) + div {
+  display: block !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  position: absolute !important;
+  left: 10px !important;
+  top: 145px !important;
+  margin-left: 0 !important;
+}
+
+.heroBanner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  color: var(--text-color-main);
+  h2 {
+    font-size: 28px; /*clamp(2rem, 10vw, 4rem);*/
+  }
+  h3 {
+    font-size: 24px; /*clamp(1.5rem, 10vw, 3.5rem);*/
+  }
+}
