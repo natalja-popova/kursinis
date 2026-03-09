@@ -1,0 +1,23 @@
+.heroBannerWarpper {
+  color: #ffffff;
+  min-height: 80vh;
+  height: fit-content;
+  text-shadow:
+    0 0 3px rgba(0, 0, 0, 0.9),
+    0 0 6px rgba(0, 0, 0, 0.8),
+    0 0 12px rgba(0, 0, 0, 0.7);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.textWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  max-width: 90ch;
+  width: 100%;
+  padding: 0 1rem;
+}

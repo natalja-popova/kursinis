@@ -7,7 +7,14 @@
   --header-background: #001622;
   --overlay-color: #001622;
 }
-
+@font-face {
+  font-family: "Montserrat";
+  src: url("../assets/Montserrat/Montserrat-VariableFont_wght.ttf");
+}
+@font-face {
+  font-family: "Inter";
+  src: url("../assets/Inter/Inter-VariableFont_opsz\,wght.ttf");
+}
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
@@ -19,17 +26,19 @@ html,
 body {
   max-width: 100vw;
   min-width: 350px;
-  background-color: #0a0a0a;
+  line-height: 1.5;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Inter", Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
+#__next {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
 * {
   box-sizing: border-box;
   padding: 0;
@@ -40,7 +49,32 @@ a {
   color: inherit;
   text-decoration: none;
 }
-
+h1,
+h2,
+h3,
+h4 {
+  font-family: "Montserrat", Arial, Helvetica, sans-serif;
+}
+h2,
+.h2 {
+  font-size: clamp(1.5rem, 1.5vw + 1rem, 2.25rem); /* 24px → 36px */
+  line-height: 1.3;
+  font-weight: 600;
+  margin-bottom: 0.6em;
+}
+h3,
+.h3 {
+  font-size: clamp(1.25rem, 1vw + 0.8rem, 1.75rem); /* 20px → 28px */
+  line-height: 1.3;
+  font-weight: 600;
+  margin-bottom: 0.6em;
+}
+p {
+  font-size: clamp(1rem, 0.6vw + 0.8rem, 1.125rem);
+  line-height: 1.65;
+  margin-bottom: 1.2em;
+  max-width: 65ch; /* ideal reading width */
+}
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;

@@ -1,0 +1,24 @@
+.about {
+  padding: clamp(2rem, 6vw, 4rem) 1rem;
+
+  color: var(--text-color-secondary);
+  h2 {
+    text-align: center;
+  }
+}
+.textWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 90ch;
+}
+.contentWrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  img {
+    width: 70%;
+    height: auto;
+    margin: auto;
+  }
+}

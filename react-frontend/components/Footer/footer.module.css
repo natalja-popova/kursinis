@@ -1,0 +1,22 @@
+.footer {
+  width: 100%;
+  min-height: 70px;
+  bottom: 0;
+  background-color: var(--header-background);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    li a {
+      color: var(--text-color-secondary);
+    }
+    li a:hover {
+      color: var(--text-color-main);
+    }
+  }
+}
