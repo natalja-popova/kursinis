@@ -1,23 +1,11 @@
 import { useState } from "react";
 import style from "./hero.module.css";
-
-const Hero = () => {
-  const images = [
-    { url: "/imgSlider/Bacground-photo1.jpg" },
-    { url: "/imgSlider/Bacground-photo2.jpg" },
-    { url: "/imgSlider/Bacground-photo3.jpg" },
-    { url: "/imgSlider/Bacground-photo5.jpg" },
-    { url: "/imgSlider/Bacground-photo6.jpg" },
-    { url: "/imgSlider/Bacground-photo7.jpg" },
-  ];
-
-  const [bg] = useState(() => {
-    return images[Math.floor(Math.random() * images.length)];
-  });
+type imageProps = { bgImage: string };
+const Hero = ({ bgImage }: imageProps) => {
   return (
     <section
       className={style.heroBannerWarpper}
-      style={{ backgroundImage: `url(${bg.url})` }}
+      style={{ backgroundImage: `url(${bgImage})` }}
     >
       <div className={style.textWrapper}>
         <h2 className="h3">

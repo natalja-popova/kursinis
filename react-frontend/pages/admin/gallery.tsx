@@ -1,11 +1,13 @@
+import { validateJwt } from "@/services/authService";
 import axios from "axios";
-import { useState } from "react";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 const UploadImages = () => {
   const [images, setImages] = useState([]);
   const [uploadedImages, setUploadedImages] = useState([]);
   const [albumName, setAlbumName] = useState("");
   const [albumDescription, setAlbumDescription] = useState("");
-
+  const router = useRouter();
   const Upload = async () => {
     if (images.length === 0) {
       alert("Pasirinkit bent vieną nuotrauką");
@@ -31,6 +33,17 @@ const UploadImages = () => {
   const handleImages = (e) => {
     setImages(Array.from(e.target.files));
   };
+  useEffect(() => {
+    const run = async () => {
+      const isValid = await validateJwt();
+
+      if (!isValid) {
+        router.push("/admin/");
+        return;
+      }
+    };
+    run();
+  }, []);
   return (
     <div>
       <h3>Add photos</h3>

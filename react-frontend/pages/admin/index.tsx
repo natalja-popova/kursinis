@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import cookie from "js-cookie";
 import { useRouter } from "next/router";
-import { API_BASE_URL } from "@/config";
+import { API_BASE_URL, userTokenKey } from "@/config";
 import style from "./form.module.css";
 import { validateJwt } from "@/services/authService";
 
@@ -27,6 +28,10 @@ const LoginPage = () => {
       const response = await axios.post(`${API_BASE_URL}/admin`, {
         ...userData,
       });
+      if (response.status === 200) {
+        cookie.set(userTokenKey, response.data.jwt);
+        router.push("/admin/gallery");
+      }
     } catch (err: any) {
       if (err.response) {
         setErrMsg(err.response.data.message);

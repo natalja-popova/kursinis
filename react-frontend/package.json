@@ -15,6 +15,7 @@
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "react-image-gallery": "^2.1.2",
+    "react-modal": "^3.16.3",
     "react-simple-image-slider": "^2.4.1"
   },
   "devDependencies": {

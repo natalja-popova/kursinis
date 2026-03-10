@@ -3,22 +3,22 @@ import Image from "next/image";
 
 const About = () => {
   return (
-    <section className={style.about}>
+    <section id="Apie" className={style.about}>
       <h2>Apie Mus</h2>
       <div className={style.contentWrapper}>
         <div className={style.textWrapper}>
           <p>
-            1998m. buvo ikurtas nardymo klubas "AKVANAUTAS". Klubas yra
-            PASAULINĖS POVANDENINĖS KONFEDERACIJOS( CMAS) narys. Per savo
+            1998m. buvo ikurtas nardymo klubas &quot;AKVANAUTAS&quot;. Klubas
+            yra PASAULINĖS POVANDENINĖS KONFEDERACIJOS( CMAS) narys. Per savo
             egzistavimo laikotarpį paruošė per 700 įvarių lygmenų nardytojų.
-            Taip pat siulome ir "NITROX" kursai (nardymas su padidintu O2
-            kiekiu). Klubo nariai dalyvauja fotografijos parodose pateikdami
+            Taip pat siulome ir &quot;NITROX&quot; kursai (nardymas su padidintu
+            O2 kiekiu). Klubo nariai dalyvauja fotografijos parodose pateikdami
             povandeninių fotografijų, spausdina straispsnius ir nuotraukas apie
             keliones.
-          </p>
-          <p>
-            Baigusiems nardymo kursus "AKVANAUTAS" organizuoja nardymo kelionės.
-            Daug kartų aplankyta Raudonoji jūra, nardyta Mauricijuje,
+            <br />
+            <br />
+            Baigusiems nardymo kursus &quot;AKVANAUTAS&quot; organizuoja nardymo
+            kelionės. Daug kartų aplankyta Raudonoji jūra, nardyta Mauricijuje,
             Maldyvuose, Fidži, Galapaguose, Prancūzų Polinezijoje, Kroatijoje,
             Filipinuose,Papua Naujuoji Gvinejoje.
           </p>

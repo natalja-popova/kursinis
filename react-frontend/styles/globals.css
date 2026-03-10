@@ -6,6 +6,9 @@
   --footer-background: #00031ebd;
   --header-background: #001622;
   --overlay-color: #001622;
+  --button-background: #00aeef;
+  --button-background-hover: #079bd1;
+  --link-hover: #079bd1;
 }
 @font-face {
   font-family: "Montserrat";
@@ -28,7 +31,9 @@ body {
   min-width: 350px;
   line-height: 1.5;
 }
-
+html {
+  scroll-behavior: smooth;
+}
 body {
   font-family: "Inter", Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -72,8 +77,11 @@ h3,
 p {
   font-size: clamp(1rem, 0.6vw + 0.8rem, 1.125rem);
   line-height: 1.65;
-  margin-bottom: 1.2em;
+  /* margin-bottom: 1.2em; */
   max-width: 65ch; /* ideal reading width */
+}
+section {
+  padding: clamp(2rem, 6vw, 4rem) 1rem;
 }
 @media (prefers-color-scheme: dark) {
   html {
