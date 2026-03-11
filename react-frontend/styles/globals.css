@@ -3,12 +3,16 @@
   --foreground: #171717;
   --text-color-main: #ffffff;
   --text-color-secondary: #00aeef;
-  --footer-background: #00031ebd;
-  --header-background: #001622;
+  --footer-background: #0b1120;
+  --header-background: #0b1120;
   --overlay-color: #001622;
-  --button-background: #00aeef;
-  --button-background-hover: #079bd1;
-  --link-hover: #079bd1;
+  --button-background-hover: #0f7bb5;
+  --button-background: #38bdf8;
+  --link-color: #0f7bb5;
+  --link-hover-color: #38bdf8;
+  --section-light-blue: #e5f3ff;
+  --section-light-green: #d1fae5;
+  --heading-color: #0b1120;
 }
 @font-face {
   font-family: "Montserrat";
@@ -49,6 +53,21 @@ body {
   padding: 0;
   margin: 0;
 }
+button {
+  all: unset;
+  cursor: pointer;
+  background-color: var(--button-background);
+  &:hover {
+    background-color: var(--button-background-hover);
+  }
+  border-radius: 4px;
+  text-align: center;
+}
+button,
+input,
+textarea {
+  padding: 5px 8px;
+}
 
 a {
   color: inherit;
@@ -59,6 +78,7 @@ h2,
 h3,
 h4 {
   font-family: "Montserrat", Arial, Helvetica, sans-serif;
+  color: var(--heading-color);
 }
 h2,
 .h2 {

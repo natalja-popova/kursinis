@@ -5,6 +5,7 @@ import axios from "axios";
 import style from "./form.module.css";
 import { validateRequired } from "../../utils/utils";
 import { API_BASE_URL, emailRegex, pswRegex, userTokenKey } from "@/config";
+import PageTemplate from "@/components/Admin/PageTemplate/PageTemplate";
 
 const RegisterPage = () => {
   const [userEmail, setUserEmail] = useState("");
@@ -62,35 +63,37 @@ const RegisterPage = () => {
     console.log("hi");
   };
   return (
-    <div className={style.formWrapper}>
-      <h1>Register</h1>
-      <input
-        type="text"
-        placeholder="Name"
-        value={userName}
-        onChange={(e) => setName(e.target.value)}
-      />
-      <input
-        type="text"
-        value={userEmail}
-        onChange={(e) => {
-          setUserEmail(e.target.value);
-        }}
-        placeholder="El.pastas"
-      />
-      <input
-        type="password"
-        value={userPsw}
-        onChange={(e) => {
-          setUserPsw(e.target.value);
-        }}
-        placeholder="Iveskite slaptazodi"
-      />
-      {errorMsg && <p className={style.error}>{errorMsg}</p>}
-      <button onClick={register} disabled={disableButton}>
-        Prisijungti
-      </button>
-    </div>
+    <PageTemplate>
+      <div className={style.formWrapper}>
+        <h1>Register</h1>
+        <input
+          type="text"
+          placeholder="Name"
+          value={userName}
+          onChange={(e) => setName(e.target.value)}
+        />
+        <input
+          type="text"
+          value={userEmail}
+          onChange={(e) => {
+            setUserEmail(e.target.value);
+          }}
+          placeholder="El.pastas"
+        />
+        <input
+          type="password"
+          value={userPsw}
+          onChange={(e) => {
+            setUserPsw(e.target.value);
+          }}
+          placeholder="Iveskite slaptazodi"
+        />
+        {errorMsg && <p className={style.error}>{errorMsg}</p>}
+        <button onClick={register} disabled={disableButton}>
+          Prisijungti
+        </button>
+      </div>
+    </PageTemplate>
   );
 };
 
