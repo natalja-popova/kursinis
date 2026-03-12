@@ -4,37 +4,45 @@ import path from "path";
 import fs from "fs";
 
 export const UploadGallery = async (req, res) => {
-  if (!req.files || req.files.length === 0) {
-    return res.status(500).json({ error: "Nepavyko ikelti nuotrauku" });
-  }
-  const paths = req.files.map(
-    (file) => `/gallery/${req.body.albumName}/${file.filename}`,
-  );
-  const albumName = req.body.albumName;
-  const albumDescription = req.body.albumDescription;
-
-  let album = await AlbumModel.findOne({ albumName: albumName });
-  console.log("album", album);
-  if (!album) {
-    album = new AlbumModel({
-      id: uniqueID(),
-      albumName: albumName,
-      description: albumDescription,
-      images: paths,
-    });
-  } else {
-    paths.forEach((path) => {
-      if (!album.images.includes(path)) {
-        album.images.push(path);
-      }
-    });
-
-    if (albumDescription) {
-      album.description = albumDescription;
+  try {
+    if (!req.files || req.files.length === 0) {
+      return res.status(500).json({ error: "Nepavyko įkelti nuotraukų" });
     }
+    const paths = req.files.map(
+      (file) => `/gallery/${req.body.albumName}/${file.filename}`,
+    );
+    const albumName = req.body.albumName;
+    const albumDescription = req.body.albumDescription;
+
+    let album = await AlbumModel.findOne({ albumName: albumName });
+
+    if (!album) {
+      album = new AlbumModel({
+        id: uniqueID(),
+        albumName: albumName,
+        description: albumDescription,
+        images: paths,
+      });
+    } else {
+      paths.forEach((path) => {
+        if (!album.images.includes(path)) {
+          album.images.push(path);
+        }
+      });
+
+      if (albumDescription) {
+        album.description = albumDescription;
+      }
+    }
+    await album.save();
+    res.json({ paths }, album);
+  } catch (err) {
+    console.error("UploadGallery error:", err);
+    return res.status(500).json({
+      error: "Įvyko serverio klaida įkeliant nuotraukas",
+      details: err.message,
+    });
   }
-  await album.save();
-  res.json({ paths }, album);
 };
 
 export const getAllAlbums = async (req, res) => {
@@ -75,9 +83,9 @@ export const deleteImages = async (req, res) => {
     res.status(500).json({ message: "Klaida" });
   }
 };
+
 export const deleteAlbum = async (req, res) => {
   const { albumName } = req.params;
-
   try {
     const folderPath = path.join("gallery", albumName);
 

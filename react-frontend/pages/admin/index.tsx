@@ -77,7 +77,7 @@ const AdminIndex = () => {
             onChange={(e) => {
               setUserPsw(e.target.value);
             }}
-            placeholder="Iveskite slaptazodi"
+            placeholder="Įveskite slaptažodį"
           />
           {errorMsg && <p className={style.error}>{errorMsg}</p>}
           <button onClick={login} disabled={disableButton}>

@@ -4,6 +4,9 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import style from "./styles.module.css";
 import { useRouter } from "next/router";
+import UploadImages from "./addAlbum";
+import AddImages from "@/components/Admin/AddImages/AddImages";
+import { symlink } from "fs";
 
 type Album = {
   id: string;
@@ -18,6 +21,8 @@ const AllAlbums = () => {
   const [selectedImages, setSelectedImages] = useState<
     { album: string; image: string }[]
   >([]);
+  const [openAlbums, setOpenAlbums] = useState<Record<string, boolean>>({});
+  const [successMessage, setSuccessMessage] = useState("");
 
   const fetchAlbums = async () => {
     const res = await axios.get(`${API_BASE_URL}/getAllAlbums`);
@@ -38,15 +43,35 @@ const AllAlbums = () => {
         : [...selected, { album, image }];
     });
   };
+  const toggleAddImages = (id: string) => {
+    setOpenAlbums((prev) => ({
+      ...prev,
+      [id]: !prev[id], // ← toggle
+    }));
+  };
+  const closeAddImages = (id: string) => {
+    setOpenAlbums((prev) => ({
+      ...prev,
+      [id]: false,
+    }));
+  };
 
   useEffect(() => {
     fetchAlbums();
   }, []);
 
-  const AddAlbum = (albumId: string) => {
-    console.log("albumId", albumId);
-  };
   const removePhotos = async () => {
+    if (selectedImages.length === 0) {
+      alert("Išrinkite bent vieną nuotrauką");
+    }
+    const uniqueAlbums = [...new Set(selectedImages.map((item) => item.album))];
+
+    const ok = confirm(
+      `Ar tikrai norite ištrinti pasirenktas nuotraukas iš ${uniqueAlbums} albumo/ų? `,
+    );
+    if (!ok) {
+      return;
+    }
     try {
       const res = await axios.delete(`${API_BASE_URL}/deleteImages`, {
         data: { images: selectedImages },
@@ -54,8 +79,6 @@ const AllAlbums = () => {
 
       await fetchAlbums();
       setSelectedImages([]);
-
-      console.log("Ištrinta sėkmingai");
     } catch (err: any) {
       console.error("Klaida trinant nuotraukas:", err);
       if (err.response) {
@@ -69,6 +92,10 @@ const AllAlbums = () => {
   };
 
   const removeAlbum = async (id: string, name: string) => {
+    const ok = confirm(`Ar tikrai norite ištrinti albumą ${name}`);
+    if (!ok) {
+      return;
+    }
     try {
       await axios.delete(`${API_BASE_URL}/deleteAlbum/${name}`);
       await fetchAlbums();
@@ -90,38 +117,66 @@ const AllAlbums = () => {
         {albums.length > 0 ? (
           albums.map((album) => (
             <div key={album.id} className={style.albumWarpper}>
-              <div className={style.ctaWarpper}>
+              <div className={style.ctaHeaderWarpper}>
                 <h3>{album.albumName}</h3>
-                <div>
+                <div className={style.ctaWarpper}>
                   <button onClick={removePhotos}>Ištrinti nuotraukas</button>
                   <button
                     onClick={() => removeAlbum(album.id, album.albumName)}
                   >
                     Ištrinti albumą
                   </button>
-                  <button onClick={() => AddAlbum(album.id)}>
+                  <button onClick={() => toggleAddImages(album.id)}>
                     Pridėti nuotraukas
                   </button>
                 </div>
+              </div>
+              <div>
+                {successMessage && (
+                  <div className={style.successMessage}>{successMessage}</div>
+                )}
+              </div>
+              <div
+                className={
+                  openAlbums[album.id]
+                    ? style.addImageVisible
+                    : style.addImageHidden
+                }
+              >
+                <AddImages
+                  aName={album.albumName}
+                  aDescripion={album.description}
+                  clearInputs={false}
+                  onSuccess={(msg) => {
+                    setSuccessMessage(msg);
+                    closeAddImages(album.id);
+                    fetchAlbums();
+
+                    setTimeout(() => setSuccessMessage(""), 3000);
+                  }}
+                />
               </div>
               <div className={style.imagesWrapper}>
                 {album.images.map((image) => {
                   const imagePath = `${API_BASE_URL}${image}`;
                   return (
                     <div key={image}>
-                      <img
-                        className={style.imgSize}
-                        src={imagePath}
-                        alt={album.description}
-                      />
                       <label
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                          gap: "8px",
-                          marginTop: "6px",
-                        }}
+                        className={
+                          selectedImages.some(
+                            (item) =>
+                              item.image === image &&
+                              item.album === album.albumName,
+                          )
+                            ? `${style.checkboxLabel} ${style.selected}`
+                            : style.checkboxLabel
+                        }
                       >
+                        <img
+                          className={style.imgSize}
+                          src={imagePath}
+                          alt={album.description}
+                        />
                         <input
                           type="checkbox"
                           checked={selectedImages.some(
@@ -131,7 +186,6 @@ const AllAlbums = () => {
                           )}
                           onChange={() => handleSelect(image, album.albumName)}
                         />
-                        pasirinkti
                       </label>
                     </div>
                   );
