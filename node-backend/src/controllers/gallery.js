@@ -1,5 +1,8 @@
 import AlbumModel from "../models/gallery.js";
 import { v4 as uniqueID } from "uuid";
+import path from "path";
+import fs from "fs";
+
 export const UploadGallery = async (req, res) => {
   if (!req.files || req.files.length === 0) {
     return res.status(500).json({ error: "Nepavyko ikelti nuotrauku" });
@@ -41,5 +44,52 @@ export const getAllAlbums = async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Failed to load albums" });
+  }
+};
+
+export const deleteImages = async (req, res) => {
+  const { images } = req.body;
+
+  try {
+    for (const item of images) {
+      const { album, image } = item;
+      console.log("item", item, "album=", album, "image", image);
+
+      const fileName = image.split("/").pop();
+
+      const filePath = path.join("gallery", album, fileName);
+
+      if (fs.existsSync(filePath)) {
+        fs.unlinkSync(filePath);
+      }
+
+      await AlbumModel.updateOne(
+        { albumName: album },
+        { $pull: { images: image } },
+      );
+    }
+
+    res.json({ success: true });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Klaida" });
+  }
+};
+export const deleteAlbum = async (req, res) => {
+  const { albumName } = req.params;
+
+  try {
+    const folderPath = path.join("gallery", albumName);
+
+    if (fs.existsSync(folderPath)) {
+      fs.rmSync(folderPath, { recursive: true, force: true });
+    }
+
+    await AlbumModel.deleteOne({ albumName });
+
+    return res.json({ success: true });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ message: "Klaida trinant albumą" });
   }
 };
