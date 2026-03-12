@@ -126,8 +126,13 @@
     top: 100px;
     width: 100%;
   }
+  .overlayPosition,
+  .overlayPositionHidden {
+    top: 100;
+  }
+
   .header {
-    height: 100px;
+    min-height: 100px;
   }
   .header h1 {
     font-size: 1rem;
