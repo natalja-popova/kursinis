@@ -1,6 +1,6 @@
 .header {
   padding: 0 1rem;
-  height: 140px;
+  min-height: 140px;
   background-color: var(--header-background);
   width: 100%;
   top: 0;
@@ -19,14 +19,15 @@
     justify-content: center;
     align-items: center;
     li a {
-      color: var(--text-color-main);
+      color: var(--text-color-secondary);
     }
     li a:hover {
-      color: var(--text-color-secondary);
+      color: var(--link-hover-color);
     }
   }
   h1 {
     font-size: clamp(1.3rem, 6vw, 2rem);
+    color: var(--text-color-secondary);
   }
 }
 .brandWrapper {
@@ -88,8 +89,11 @@
     padding-left: 1rem;
     padding-top: 1rem;
   }
-  nav ul li a:hover {
+  nav ul li a {
     color: var(--text-color-secondary);
+  }
+  li a:hover {
+    color: var(--link-hover-color);
   }
 }
 

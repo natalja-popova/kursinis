@@ -78,7 +78,9 @@ const AddImages = ({
         value={albumDescription}
         onChange={(e) => setAlbumDescription(e.target.value)}
       />
-      <button onClick={Upload}>Įkelti</button>
+      <button className="btnCTA" onClick={Upload}>
+        Įkelti
+      </button>
       {uploadMessage && <div>{uploadMessage}</div>}
     </div>
   );

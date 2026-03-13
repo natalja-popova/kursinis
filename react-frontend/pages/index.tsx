@@ -2,12 +2,15 @@ import style from "./index.module.css";
 import Header from "@/components/Header/Header";
 import Foooter from "@/components/Footer/Foooter";
 import Hero from "@/components/Hero/Hero";
-import Image from "next/image";
+import ReactModal from "react-modal";
+
 import About from "@/components/About/About";
 import { useState } from "react";
 import Courses from "@/components/Courses/Courses";
 import Medicine from "../components/About/Мedicine";
 import Gallery from "@/components/Gallery/Gallery";
+
+ReactModal.setAppElement("#__next"); // Next.js root
 
 const HomePage = () => {
   const navLinks = [

@@ -1,0 +1,30 @@
+.course {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  border-radius: 6px;
+  padding: 1rem;
+  gap: 1rem;
+  margin: auto;
+  width: 450px;
+  height: 250px;
+  min-height: fit-content;
+  height: 100%;
+  h3 {
+    color: var(--heading-color);
+    text-align: center;
+  }
+}
+.img {
+  margin: auto;
+  border-radius: 3px;
+}
+@media (max-width: 500px) {
+  .course {
+    width: 300px;
+  }
+  .img {
+    width: 250px;
+  }
+}

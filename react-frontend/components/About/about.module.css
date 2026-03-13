@@ -17,8 +17,17 @@
   align-items: center;
   justify-content: center;
   max-width: 90ch;
+  a {
+    color: var(--link-color);
+    &:hover {
+      color: var(--link-hover-color);
+      text-decoration: underline;
+    }
+  }
 }
 .contentWrapper {
+  max-width: var(--max-width);
+  margin: auto;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   img {

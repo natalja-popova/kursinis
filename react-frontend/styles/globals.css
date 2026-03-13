@@ -8,8 +8,8 @@
   --overlay-color: #0b1120;
   --button-background-hover: #22c55e;
   --button-background: #4ade80;
-  --button-CTA-background-hover: #0f7bb5;
-  --button-CTA-background: #38bdf8;
+  --button-CTA-background: #0f7bb5;
+  --button-CTA-background-hover: #38bdf8;
   --link-color: #0f7bb5;
   --link-hover-color: #38bdf8;
   --section-background-1: #e5f3ff;
@@ -18,9 +18,13 @@
   --heading-color: #0b1120;
   --heading-color-white: #ffffff;
   --hero-cards-text-color: white;
+  --color-danger: #a52a2a;
+  --color-danger-hover: #c94c4c;
+  --max-width: 1600px;
 }
 @font-face {
   font-family: "Montserrat";
+
   src: url("../assets/Montserrat/Montserrat-VariableFont_wght.ttf");
 }
 @font-face {
@@ -66,9 +70,9 @@ button {
   text-align: center;
 }
 .btnCTA {
-  background-color: var(--button-background);
+  background-color: var(--button-CTA-background);
   &:hover {
-    background-color: var(--button-background-hover);
+    background-color: var(--button-CTA-background-hover);
   }
 }
 .btn {
@@ -77,11 +81,17 @@ button {
     background-color: var(--button-background-hover);
   }
 }
-
+.btnDanger {
+  background-color: var(--color-danger);
+  &:hover {
+    background-color: var(--color-danger-hover);
+  }
+}
 button,
 input,
 textarea {
   padding: 5px 8px;
+  font-size: clamp(1rem, 0.6vw + 0.8rem, 1.125rem);
 }
 
 a {
@@ -94,6 +104,9 @@ h3,
 h4 {
   font-family: "Montserrat", Arial, Helvetica, sans-serif;
   color: var(--heading-color);
+}
+h2 {
+  margin-bottom: 2rem !important;
 }
 h2,
 .h2 {

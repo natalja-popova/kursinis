@@ -7,13 +7,13 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem 1rem;
-  color: var(--text-color-main);
+  color: var(--text-color-secondary);
   flex-wrap: wrap;
   gap: 3rem;
   p {
     font-size: 16px;
     a:hover {
-      color: var(--text-color-secondary);
+      color: var(--link-hover-color);
     }
   }
 }

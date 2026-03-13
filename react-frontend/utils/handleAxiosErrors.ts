@@ -4,6 +4,7 @@ export function handleAxiosError(error: unknown): string {
   const err = error as AxiosError<{ message?: string }>;
 
   if (err.response) {
+    console.log(err.response);
     return err.response.data?.message || "Serverio klaida";
   }
 

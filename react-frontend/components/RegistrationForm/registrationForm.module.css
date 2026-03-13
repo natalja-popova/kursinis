@@ -1,0 +1,26 @@
+.radioButtonsWarapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  span {
+    font-weight: bold;
+    display: inline-block;
+  }
+  input {
+    margin-right: 5px;
+  }
+}
+.formWrapper {
+  display: flex;
+  padding-top: 1rem;
+  flex-direction: column;
+  gap: 1rem;
+  label {
+    display: flex;
+  }
+  input,
+  button {
+    max-width: 300px;
+  }
+}

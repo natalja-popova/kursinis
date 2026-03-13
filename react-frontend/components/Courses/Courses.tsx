@@ -1,42 +1,45 @@
 import Image from "next/image";
 import style from "./courses.module.css";
+import CourseCard from "./CoursesCard";
+import RegistrationForm from "../RegistrationForm/RegistrationForm";
+import { useState } from "react";
 
 const Courses = () => {
+  const [selectedLevel, setSelectedLevel] = useState<
+    "CMAS1" | "CMAS2" | "CMAS3"
+  >("CMAS1");
   return (
     <section id="Mokymai" className={style.sectionWrapper}>
       <h2> Nardymo kursai</h2>
       <div className={style.contentWrapper}>
         <div className={style.coursesWrapper}>
-          <div className={style.course}>
-            <h3>CMAS 1* nardymo kursai</h3>
-            <Image
-              className={style.img}
-              src="/images/courses/cmas-1-kursai.png"
-              width={350}
-              height={233}
-              alt="CMAS 1* nardymo kursai"
-            />
-
-            <p>350€ + 50€ nardymo sertifikatas ir nardymo knygelė</p>
-            <p>Nuo 14 metų</p>
-
-            <button>Registruotis</button>
-          </div>
-          <div className={style.course}>
-            <h3>CMAS 2* nardymo kursai:</h3>
-            <p>350€ + 50€ nardymo sertifikatas</p>
-
-            <button>Registruotis</button>
-          </div>
-          <div className={style.course}>
-            <h3>CMAS vaikų kursai:</h3>
-            <p>350€ + 50€ nardymo sertifikatas ir nardymo knygelė</p>
-            <p>nuo 8 iki 14 metų</p>
-
-            <button>Registruotis</button>
-          </div>
+          <CourseCard
+            h3="CMAS 1* nardymo kursai"
+            imgSrc="/images/courses/cmas-1-kursai.png"
+            text1="350€ + 50€ nardymo sertifikatas ir nardymo knygelė"
+            text2="Nuo 14 metų"
+            onRegisterClick={() => setSelectedLevel("CMAS1")}
+          />
+          <CourseCard
+            h3="CMAS 2* nardymo kursai"
+            imgSrc="/images/courses/cmas-2-kursai.png"
+            text1="350€ + 50€ nardymo sertifikatas"
+            text2=""
+            onRegisterClick={() => setSelectedLevel("CMAS2")}
+          />
+          <CourseCard
+            h3="CMAS vaikų kursai"
+            imgSrc="/images/courses/cmas-vaiku-kursai.jpg"
+            text1="350€ + 50€ nardymo sertifikatas ir nardymo knygelė"
+            text2="nuo 8 iki 14 metų"
+            onRegisterClick={() => setSelectedLevel("CMAS3")}
+          />
         </div>
       </div>
+      <RegistrationForm
+        selectedLevel={selectedLevel}
+        onChangeLevel={setSelectedLevel}
+      />
     </section>
   );
 };

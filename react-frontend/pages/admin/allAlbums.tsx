@@ -108,11 +108,19 @@ const AllAlbums = () => {
               <div className={style.ctaHeaderWarpper}>
                 <h3>{album.albumName}</h3>
                 <div className={style.ctaWarpper}>
-                  <button onClick={removePhotos}>Ištrinti nuotraukas</button>
-                  <button onClick={() => removeAlbum(album.albumName)}>
+                  <button className="btnDanger" onClick={removePhotos}>
+                    Ištrinti nuotraukas
+                  </button>
+                  <button
+                    className="btnDanger"
+                    onClick={() => removeAlbum(album.albumName)}
+                  >
                     Ištrinti albumą
                   </button>
-                  <button onClick={() => toggleAddImages(album.id)}>
+                  <button
+                    className="btn"
+                    onClick={() => toggleAddImages(album.id)}
+                  >
                     Pridėti nuotraukas
                   </button>
                 </div>
