@@ -135,6 +135,23 @@ section {
   font-weight: bold;
   color: red;
 }
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.modalContent {
+  background: #fff;
+  border-radius: 8px;
+  padding: 24px;
+  max-width: 600px;
+  width: 100%;
+}
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;

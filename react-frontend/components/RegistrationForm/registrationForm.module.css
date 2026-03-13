@@ -10,6 +10,16 @@
   input {
     margin-right: 5px;
   }
+  label {
+    span {
+      font-size: 16px;
+      white-space: nowrap;
+    }
+  }
+  button {
+    width: 200px;
+    margin: auto;
+  }
 }
 .formWrapper {
   display: flex;
@@ -22,5 +32,21 @@
   input,
   button {
     max-width: 300px;
+  }
+}
+
+.radioButton {
+  p {
+    margin-left: 5px;
+    font-size: 14px;
+  }
+}
+.headerWarpper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+  button {
+    align-self: start;
   }
 }

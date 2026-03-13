@@ -35,7 +35,9 @@
   }
   background-color: var(--section-background-1);
 }
-
+.closeModal {
+  margin-left: auto;
+}
 @media (max-width: 500px) {
   .coursesWrapper {
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));

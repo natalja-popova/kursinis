@@ -7,10 +7,12 @@ import { validateRequired } from "@/utils/utils";
 type RegistrationFormProps = {
   selectedLevel: "CMAS1" | "CMAS2" | "CMAS3";
   onChangeLevel?: (level: "CMAS1" | "CMAS2" | "CMAS3") => void;
+  onClose?: () => void;
 };
 const RegistrationForm = ({
   selectedLevel,
   onChangeLevel,
+  onClose,
 }: RegistrationFormProps) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -47,7 +49,12 @@ const RegistrationForm = ({
 
   return (
     <div>
-      <h3>Registracija</h3>
+      <div className={style.headerWarpper}>
+        <h3>Registracija</h3>
+        <button className={`btn ${style.closeModal}`} onClick={onClose}>
+          X
+        </button>
+      </div>
       {!hideForm ? (
         <>
           <p>
@@ -78,43 +85,54 @@ const RegistrationForm = ({
               }}
             />
             {errMsg && <p className="errorMsg">{errMsg}</p>}
-            <label>Kursų programa:</label>
+            <label>pasirinkti kursą:</label>
 
             <div className={style.radioButtonsWarapper}>
-              <label>
-                <input
-                  type="radio"
-                  name="level"
-                  value="CMAS1"
-                  checked={selectedLevel === "CMAS1"}
-                  onChange={() => onChangeLevel?.("CMAS1")}
-                />
-                <span>CMAS 1</span> - 350€ + 50€ nardymo sertifikatas ir nardymo
-                knygelė (nuo 14 metų)
-              </label>
-
-              <label>
-                <input
-                  type="radio"
-                  name="level"
-                  value="CMAS2"
-                  checked={selectedLevel === "CMAS2"}
-                  onChange={() => onChangeLevel?.("CMAS2")}
-                />
-                <span>CMAS 2</span> - 350€ + 50€ nardymo sertifikatas
-              </label>
-
-              <label>
-                <input
-                  type="radio"
-                  name="level"
-                  value="CMAS3"
-                  checked={selectedLevel === "CMAS3"}
-                  onChange={() => onChangeLevel?.("CMAS3")}
-                />
-                <span>CMAS 3</span> - 350€ + 50€ nardymo sertifikatas ir nardymo
-                knygelė (nuo 8 iki 14 metų)
-              </label>
+              <div className={style.radioButton}>
+                <label>
+                  <input
+                    type="radio"
+                    name="level"
+                    value="CMAS1"
+                    checked={selectedLevel === "CMAS1"}
+                    onChange={() => onChangeLevel?.("CMAS1")}
+                  />
+                  <span>CMAS 1</span>
+                </label>
+                <p>
+                  350€ + 50€ nardymo sertifikatas ir nardymo knygelė (nuo 14
+                  metų)
+                </p>
+              </div>
+              <div className={style.radioButton}>
+                <label>
+                  <input
+                    type="radio"
+                    name="level"
+                    value="CMAS2"
+                    checked={selectedLevel === "CMAS2"}
+                    onChange={() => onChangeLevel?.("CMAS2")}
+                  />
+                  <span>CMAS 2</span>
+                </label>{" "}
+                <p>350€ + 50€ nardymo sertifikatas</p>
+              </div>
+              <div className={style.radioButton}>
+                <label>
+                  <input
+                    type="radio"
+                    name="level"
+                    value="CMAS3"
+                    checked={selectedLevel === "CMAS3"}
+                    onChange={() => onChangeLevel?.("CMAS3")}
+                  />
+                  <span>CMAS 3</span>
+                </label>
+                <p>
+                  350€ + 50€ nardymo sertifikatas ir nardymo knygelė (nuo 8 iki
+                  14 metų)
+                </p>
+              </div>
             </div>
             <button className="btnCTA" onClick={sendRegistration}>
               SIŲSTI
