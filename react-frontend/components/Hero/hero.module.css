@@ -1,5 +1,5 @@
 .heroBannerWarpper {
-  color: #ffffff;
+  color: var(--heading-color-white);
   min-height: 80vh;
   height: fit-content;
   text-shadow:
@@ -12,6 +12,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  h2,
+  h3 {
+    color: var(--heading-color-white);
+  }
 }
 .textWrapper {
   display: flex;

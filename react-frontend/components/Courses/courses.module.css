@@ -12,27 +12,20 @@
   flex-wrap: wrap;
   align-items: center;
   button {
-    all: unset;
-    align-self: center;
-    padding: 8px 12px;
-    border-radius: 4px;
-    background-color: var(--button-background);
-    cursor: pointer;
-    text-shadow: none;
+    background-color: var(--button-CTA-background);
     margin-top: auto;
     align-self: stretch;
     text-align: center;
     &:hover {
-      background-color: var(--button-background-hover);
+      background-color: var(--button-CTA-background-hover);
     }
   }
 }
 .course {
   display: flex;
   flex-direction: column;
-
+  background-color: white;
   border: 1px solid rgba(0, 0, 0, 0.4);
-  background: rgba(0, 0, 0, 0.4);
   border-radius: 6px;
   padding: 1rem;
   gap: 1rem;
@@ -40,18 +33,18 @@
   width: 450px;
   height: 250px;
   min-height: fit-content;
+  h3 {
+    color: var(--heading-color);
+    text-align: center;
+  }
 }
-.bgrImage {
-  background-image: url("/imgSlider/Bacground-photo1.jpg");
-  height: fit-content;
-  text-shadow:
-    0 0 3px rgba(0, 0, 0, 0.9),
-    0 0 6px rgba(0, 0, 0, 0.8),
-    0 0 12px rgba(0, 0, 0, 0.7);
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+.img {
+  margin: auto;
+  border-radius: 3px;
+}
+.sectionWrapper {
   h2 {
     text-align: center;
   }
+  background-color: var(--section-background-1);
 }

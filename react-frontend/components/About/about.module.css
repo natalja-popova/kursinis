@@ -1,5 +1,12 @@
 .about {
-  color: var(--text-color-secondary);
+  color: var(--text-color-main);
+  h2 {
+    text-align: center;
+  }
+  background-color: var(--section-background-2);
+}
+.medicine {
+  color: var(--text-color-main);
   h2 {
     text-align: center;
   }

@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const Medicine = () => {
   return (
-    <section className={style.about}>
+    <section className={style.medicine}>
       <h2> Nardymo gydytoja </h2>
       <div className={style.contentWrapper}>
         <Image

@@ -6,7 +6,7 @@ const UploadImages = () => {
     <PageTemplate>
       <h3>Pridėti nuotraukų albumą</h3>
 
-      <AddImages aName="" aDescripion="" clearInputs={true} />
+      <AddImages aName="" aDescription="" clearInputs={true} />
     </PageTemplate>
   );
 };

@@ -1,18 +1,23 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
-  --text-color-main: #ffffff;
-  --text-color-secondary: #00aeef;
+  --text-color-main: #0b1120;
+  --text-color-secondary: #ffffff;
   --footer-background: #0b1120;
   --header-background: #0b1120;
-  --overlay-color: #001622;
-  --button-background-hover: #0f7bb5;
-  --button-background: #38bdf8;
+  --overlay-color: #0b1120;
+  --button-background-hover: #22c55e;
+  --button-background: #4ade80;
+  --button-CTA-background-hover: #0f7bb5;
+  --button-CTA-background: #38bdf8;
   --link-color: #0f7bb5;
   --link-hover-color: #38bdf8;
-  --section-light-blue: #e5f3ff;
-  --section-light-green: #d1fae5;
+  --section-background-1: #e5f3ff;
+  --section-background-2: #d1fae5;
+  --section-background-3: #ffffff;
   --heading-color: #0b1120;
+  --heading-color-white: #ffffff;
+  --hero-cards-text-color: white;
 }
 @font-face {
   font-family: "Montserrat";
@@ -56,13 +61,23 @@ body {
 button {
   all: unset;
   cursor: pointer;
+  color: var(--text-color-secondary);
+  border-radius: 4px;
+  text-align: center;
+}
+.btnCTA {
   background-color: var(--button-background);
   &:hover {
     background-color: var(--button-background-hover);
   }
-  border-radius: 4px;
-  text-align: center;
 }
+.btn {
+  background-color: var(--button-background);
+  &:hover {
+    background-color: var(--button-background-hover);
+  }
+}
+
 button,
 input,
 textarea {
