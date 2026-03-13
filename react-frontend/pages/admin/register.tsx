@@ -6,6 +6,7 @@ import style from "./form.module.css";
 import { validateRequired } from "../../utils/utils";
 import { API_BASE_URL, emailRegex, pswRegex, userTokenKey } from "@/config";
 import PageTemplate from "@/components/Admin/PageTemplate/PageTemplate";
+import { handleAxiosError } from "@/utils/handleAxiosErrors";
 
 const RegisterPage = () => {
   const [userEmail, setUserEmail] = useState("");
@@ -32,6 +33,7 @@ const RegisterPage = () => {
       );
       return;
     }
+    setDisableButton(true);
     setErrMsg("");
     const userData = {
       userName: userName,
@@ -47,20 +49,10 @@ const RegisterPage = () => {
         router.push("/admin/gallery");
       }
     } catch (error) {
-      if (axios.isAxiosError(error)) {
-        const msg =
-          error.response?.data?.message ||
-          error.response?.data?.error ||
-          "Serverio klaida.";
-
-        setErrMsg(msg);
-      } else {
-        setErrMsg("Įvyko klaida.");
-      }
+      setErrMsg(handleAxiosError(error));
     } finally {
       setDisableButton(false);
     }
-    console.log("hi");
   };
   return (
     <PageTemplate>
@@ -90,7 +82,7 @@ const RegisterPage = () => {
         />
         {errorMsg && <p className={style.error}>{errorMsg}</p>}
         <button onClick={register} disabled={disableButton}>
-          Prisijungti
+          Registruotis
         </button>
       </div>
     </PageTemplate>

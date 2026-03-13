@@ -35,12 +35,11 @@ export const UploadGallery = async (req, res) => {
       }
     }
     await album.save();
-    res.json({ paths }, album);
+    return res.status(200).json({ message: "Albumas sekmingai pridėtas" });
   } catch (err) {
     console.error("UploadGallery error:", err);
     return res.status(500).json({
-      error: "Įvyko serverio klaida įkeliant nuotraukas",
-      details: err.message,
+      message: "Įvyko serverio klaida įkeliant nuotraukas" + err.message,
     });
   }
 };
@@ -51,7 +50,7 @@ export const getAllAlbums = async (req, res) => {
     res.status(200).json(albums);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ message: "Failed to load albums" });
+    res.status(500).json({ message: "Nepavyko užkrauti albumus" });
   }
 };
 
@@ -80,7 +79,7 @@ export const deleteImages = async (req, res) => {
     res.json({ success: true });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ message: "Klaida" });
+    res.status(500).json({ message: "Nepavyko ištrinti nuotrauką" });
   }
 };
 

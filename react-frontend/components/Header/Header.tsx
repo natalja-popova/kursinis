@@ -7,26 +7,24 @@ type NavLink = {
   linkText: string;
   linkTitle: string;
 };
-type headerLinksProps = {
+type HeaderLinksProps = {
   navLinks: NavLink[];
 };
 
-const Header = ({ navLinks }: headerLinksProps) => {
+const Header = ({ navLinks }: HeaderLinksProps) => {
   const [isMobileMenuOpen, setMobileMenuStatus] = useState(false);
   return (
     <>
       <header className={style.header}>
         <Link className={style.brandWrapper} href="/">
-          <>
-            <Image
-              className={style.logo}
-              alt="Povandeninio nardymo klubas"
-              src="/images/akvanautas_logo.png"
-              width={95}
-              height={95}
-            />
-            <h1>POVANDENINIO NARDYMO KLUBAS</h1>
-          </>
+          <Image
+            className={style.logo}
+            alt="Povandeninio nardymo klubas"
+            src="/images/akvanautas_logo.png"
+            width={95}
+            height={95}
+          />
+          <h1>POVANDENINIO NARDYMO KLUBAS</h1>
         </Link>
         <nav>
           <ul>

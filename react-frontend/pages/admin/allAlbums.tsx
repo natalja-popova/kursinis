@@ -1,12 +1,12 @@
-import PageTemplate from "@/components/Admin/PageTemplate/PageTemplate";
-import { API_BASE_URL } from "@/config";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import style from "./styles.module.css";
 import { useRouter } from "next/router";
-import UploadImages from "./addAlbum";
+
+import style from "./styles.module.css";
 import AddImages from "@/components/Admin/AddImages/AddImages";
-import { symlink } from "fs";
+import { handleAxiosError } from "@/utils/handleAxiosErrors";
+import PageTemplate from "@/components/Admin/PageTemplate/PageTemplate";
+import { API_BASE_URL } from "@/config";
 
 type Album = {
   id: string;
@@ -23,6 +23,7 @@ const AllAlbums = () => {
   >([]);
   const [openAlbums, setOpenAlbums] = useState<Record<string, boolean>>({});
   const [successMessage, setSuccessMessage] = useState("");
+  const [errorMsg, setErrMsg] = useState("");
 
   const fetchAlbums = async () => {
     const res = await axios.get(`${API_BASE_URL}/getAllAlbums`);
@@ -63,6 +64,7 @@ const AllAlbums = () => {
   const removePhotos = async () => {
     if (selectedImages.length === 0) {
       alert("Išrinkite bent vieną nuotrauką");
+      return;
     }
     const uniqueAlbums = [...new Set(selectedImages.map((item) => item.album))];
 
@@ -73,25 +75,18 @@ const AllAlbums = () => {
       return;
     }
     try {
-      const res = await axios.delete(`${API_BASE_URL}/deleteImages`, {
+      await axios.delete(`${API_BASE_URL}/deleteImages`, {
         data: { images: selectedImages },
       });
 
       await fetchAlbums();
       setSelectedImages([]);
-    } catch (err: any) {
-      console.error("Klaida trinant nuotraukas:", err);
-      if (err.response) {
-        alert("Serverio klaida: " + err.response.data.message);
-      } else if (err.request) {
-        alert("Serveris neatsako");
-      } else {
-        alert("Nežinoma klaida");
-      }
+    } catch (error) {
+      setErrMsg(handleAxiosError(error));
     }
   };
 
-  const removeAlbum = async (id: string, name: string) => {
+  const removeAlbum = async (name: string) => {
     const ok = confirm(`Ar tikrai norite ištrinti albumą ${name}`);
     if (!ok) {
       return;
@@ -99,21 +94,14 @@ const AllAlbums = () => {
     try {
       await axios.delete(`${API_BASE_URL}/deleteAlbum/${name}`);
       await fetchAlbums();
-    } catch (err: any) {
-      console.error("Klaida trinant albumą:", err);
-
-      if (err.response) {
-        alert("Serverio klaida: " + err.response.data.message);
-      } else if (err.request) {
-        alert("Serveris neatsako");
-      } else {
-        alert("Nežinoma klaida");
-      }
+    } catch (error) {
+      setErrMsg(handleAxiosError(error));
     }
   };
   return (
     <PageTemplate>
       <section>
+        {errorMsg && <p className="errorMsg">{errorMsg}</p>}
         {albums.length > 0 ? (
           albums.map((album) => (
             <div key={album.id} className={style.albumWarpper}>
@@ -121,9 +109,7 @@ const AllAlbums = () => {
                 <h3>{album.albumName}</h3>
                 <div className={style.ctaWarpper}>
                   <button onClick={removePhotos}>Ištrinti nuotraukas</button>
-                  <button
-                    onClick={() => removeAlbum(album.id, album.albumName)}
-                  >
+                  <button onClick={() => removeAlbum(album.albumName)}>
                     Ištrinti albumą
                   </button>
                   <button onClick={() => toggleAddImages(album.id)}>
@@ -145,7 +131,7 @@ const AllAlbums = () => {
               >
                 <AddImages
                   aName={album.albumName}
-                  aDescripion={album.description}
+                  aDescription={album.description}
                   clearInputs={false}
                   onSuccess={(msg) => {
                     setSuccessMessage(msg);

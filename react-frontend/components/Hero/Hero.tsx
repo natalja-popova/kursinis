@@ -1,7 +1,6 @@
-import { useState } from "react";
 import style from "./hero.module.css";
-type imageProps = { bgImage: string };
-const Hero = ({ bgImage }: imageProps) => {
+type ImageProps = { bgImage: string };
+const Hero = ({ bgImage }: ImageProps) => {
   return (
     <section
       className={style.heroBannerWarpper}

@@ -6,6 +6,7 @@ import { API_BASE_URL, userTokenKey } from "@/config";
 import style from "./form.module.css";
 import { validateJwt } from "@/services/authService";
 import PageTemplate from "@/components/Admin/PageTemplate/PageTemplate";
+import { handleAxiosError } from "@/utils/handleAxiosErrors";
 
 const LoginPage = () => {
   const [userEmail, setUserEmail] = useState("");
@@ -33,14 +34,8 @@ const LoginPage = () => {
         cookie.set(userTokenKey, response.data.jwt);
         router.push("/admin/gallery");
       }
-    } catch (err: any) {
-      if (err.response) {
-        setErrMsg(err.response.data.message);
-      } else if (err.request) {
-        setErrMsg("Serveris neatsako.");
-      } else {
-        setErrMsg("Įvyko klaida.");
-      }
+    } catch (error) {
+      setErrMsg(handleAxiosError(error));
     } finally {
       setDisableButton(false);
     }

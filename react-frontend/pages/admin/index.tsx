@@ -5,9 +5,9 @@ import { useRouter } from "next/router";
 import { API_BASE_URL, userTokenKey } from "@/config";
 
 import { validateJwt } from "@/services/authService";
-import style from "../../components/Header/header.module.css";
 import formStyle from "./form.module.css";
 import PageTemplate from "@/components/Admin/PageTemplate/PageTemplate";
+import { handleAxiosError } from "@/utils/handleAxiosErrors";
 
 const AdminIndex = () => {
   const [userEmail, setUserEmail] = useState("");
@@ -26,7 +26,7 @@ const AdminIndex = () => {
       email: userEmail,
       password: userPsw,
     };
-
+    setDisableButton(true);
     try {
       const response = await axios.post(`${API_BASE_URL}/admin`, {
         ...userData,
@@ -35,14 +35,8 @@ const AdminIndex = () => {
         cookie.set(userTokenKey, response.data.jwt);
         router.push("/admin/allAlbums");
       }
-    } catch (err: any) {
-      if (err.response) {
-        setErrMsg(err.response.data.message);
-      } else if (err.request) {
-        setErrMsg("Serveris neatsako.");
-      } else {
-        setErrMsg("Įvyko klaida.");
-      }
+    } catch (error) {
+      setErrMsg(handleAxiosError(error));
     } finally {
       setDisableButton(false);
     }
@@ -79,7 +73,7 @@ const AdminIndex = () => {
             }}
             placeholder="Įveskite slaptažodį"
           />
-          {errorMsg && <p className={style.error}>{errorMsg}</p>}
+          {errorMsg && <p className="errorMsg">{errorMsg}</p>}
           <button onClick={login} disabled={disableButton}>
             Prisijungti
           </button>

@@ -1,31 +1,31 @@
-import { useRef, useState } from "react";
-import style from "./addImages.module.css";
-import { useRouter } from "next/router";
+import { ChangeEvent, useRef, useState } from "react";
 import axios from "axios";
+import style from "./addImages.module.css";
+import { handleAxiosError } from "@/utils/handleAxiosErrors";
+import { API_BASE_URL } from "@/config";
 
 type AddImagesProps = {
   aName: string;
-  aDescripion?: string;
+  aDescription?: string;
   onSuccess?: (msg: string) => void;
   clearInputs?: boolean;
 };
 
 const AddImages = ({
   aName,
-  aDescripion,
+  aDescription,
   onSuccess,
   clearInputs,
 }: AddImagesProps) => {
-  const [images, setImages] = useState([]);
+  const [images, setImages] = useState<File[]>([]);
   const [albumName, setAlbumName] = useState(aName || "");
-  const [albumDescription, setAlbumDescription] = useState(aDescripion || "");
+  const [albumDescription, setAlbumDescription] = useState(aDescription || "");
 
   const [uploadMessage, setUploadMessage] = useState("");
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
-  const router = useRouter();
-
-  const handleImages = (e) => {
+  const handleImages = (e: ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files) return;
     setImages(Array.from(e.target.files));
   };
 
@@ -43,13 +43,9 @@ const AddImages = ({
     });
 
     try {
-      const response = await axios.post(
-        "http://localhost:3002/uploads",
-        imgData,
-        {
-          headers: { "Content-Type": "multipart/form-data" },
-        },
-      );
+      await axios.post(`${API_BASE_URL}/uploads`, imgData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
       setUploadMessage("Albumas sekmingai pridėtas");
       if (clearInputs) {
         setAlbumName("");
@@ -63,8 +59,8 @@ const AddImages = ({
       if (fileInputRef.current) {
         fileInputRef.current.value = "";
       }
-    } catch (err: any) {
-      setUploadMessage("Nepavyko įkelti nuotraukų. Bandykite dar kartą.");
+    } catch (error) {
+      setUploadMessage(handleAxiosError(error));
     }
   };
   return (
