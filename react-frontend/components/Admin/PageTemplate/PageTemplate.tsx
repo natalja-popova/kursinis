@@ -1,7 +1,6 @@
-import style from "./pageTemplate.module.css";
 import Header from "../Header/Header";
 import { useEffect } from "react";
-import { validateJwt } from "@/services/authService";
+import { validateJwt } from "../../../services/authService";
 import { useRouter } from "next/router";
 type PageTemplateProps = {
   children: React.ReactNode;

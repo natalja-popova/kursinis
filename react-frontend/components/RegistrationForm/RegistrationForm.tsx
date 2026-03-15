@@ -1,9 +1,9 @@
 import axios from "axios";
 import style from "./registrationForm.module.css";
 import { useState } from "react";
-import { handleAxiosError } from "@/utils/handleAxiosErrors";
-import { API_BASE_URL, emailRegex } from "@/config";
-import { validateRequired } from "@/utils/utils";
+import { handleAxiosError } from "../../utils/handleAxiosErrors";
+import { API_BASE_URL, emailRegex } from "../../config";
+import { validateRequired } from "../../utils/utils";
 type RegistrationFormProps = {
   selectedLevel: "CMAS1" | "CMAS2" | "CMAS3";
   onChangeLevel?: (level: "CMAS1" | "CMAS2" | "CMAS3") => void;

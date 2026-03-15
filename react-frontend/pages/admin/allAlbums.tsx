@@ -3,10 +3,10 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
 import style from "./styles.module.css";
-import AddImages from "@/components/Admin/AddImages/AddImages";
-import { handleAxiosError } from "@/utils/handleAxiosErrors";
-import PageTemplate from "@/components/Admin/PageTemplate/PageTemplate";
-import { API_BASE_URL } from "@/config";
+import AddImages from "../../components/Admin/AddImages/AddImages";
+import { handleAxiosError } from "../../utils/handleAxiosErrors";
+import PageTemplate from "../../components/Admin/PageTemplate/PageTemplate";
+import { API_BASE_URL } from "../../config";
 
 type Album = {
   id: string;

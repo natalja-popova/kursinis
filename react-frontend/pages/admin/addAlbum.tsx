@@ -1,5 +1,5 @@
-import PageTemplate from "@/components/Admin/PageTemplate/PageTemplate";
-import AddImages from "@/components/Admin/AddImages/AddImages";
+import PageTemplate from "../../components/Admin/PageTemplate/PageTemplate";
+import AddImages from "../../components/Admin/AddImages/AddImages";
 import style from "./styles.module.css";
 
 const UploadImages = () => {

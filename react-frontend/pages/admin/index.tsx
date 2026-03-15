@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import cookie from "js-cookie";
 import { useRouter } from "next/router";
-import { API_BASE_URL, userTokenKey } from "@/config";
+import { API_BASE_URL, userTokenKey } from "../../config";
 
-import { validateJwt } from "@/services/authService";
+import { validateJwt } from "../../services/authService";
 import formStyle from "./form.module.css";
-import PageTemplate from "@/components/Admin/PageTemplate/PageTemplate";
-import { handleAxiosError } from "@/utils/handleAxiosErrors";
+import PageTemplate from "../../components/Admin/PageTemplate/PageTemplate";
+import { handleAxiosError } from "../../utils/handleAxiosErrors";
 
 const AdminIndex = () => {
   const [userEmail, setUserEmail] = useState("");

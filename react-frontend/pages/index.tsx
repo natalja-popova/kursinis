@@ -1,7 +1,7 @@
 import style from "./index.module.css";
-import Header from "@/components/Header/Header";
-import Foooter from "@/components/Footer/Foooter";
-import Hero from "@/components/Hero/Hero";
+import Header from "../components/Header/Header";
+import Foooter from "../components/Footer/Foooter";
+import Hero from "../components/Hero/Hero";
 import ReactModal from "react-modal";
 import Head from "next/head";
 

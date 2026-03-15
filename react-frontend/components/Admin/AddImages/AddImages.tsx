@@ -1,8 +1,8 @@
 import { ChangeEvent, useRef, useState } from "react";
 import axios from "axios";
 import style from "./addImages.module.css";
-import { handleAxiosError } from "@/utils/handleAxiosErrors";
-import { API_BASE_URL } from "@/config";
+import { handleAxiosError } from "../../../utils/handleAxiosErrors";
+import { API_BASE_URL } from "../../../config";
 
 type AddImagesProps = {
   aName: string;

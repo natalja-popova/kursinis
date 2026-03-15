@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/image-gallery.css";
 import axios from "axios";
-import { API_BASE_URL } from "@/config";
+import { API_BASE_URL } from "../../config";
 import style from "./gallery.module.css";
-import { handleAxiosError } from "@/utils/handleAxiosErrors";
+import { handleAxiosError } from "../../utils/handleAxiosErrors";
 
 type Album = {
   id: string;

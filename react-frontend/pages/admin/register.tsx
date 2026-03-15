@@ -4,9 +4,9 @@ import cookie from "js-cookie";
 import axios from "axios";
 import style from "./form.module.css";
 import { validateRequired } from "../../utils/utils";
-import { API_BASE_URL, emailRegex, pswRegex, userTokenKey } from "@/config";
-import PageTemplate from "@/components/Admin/PageTemplate/PageTemplate";
-import { handleAxiosError } from "@/utils/handleAxiosErrors";
+import { API_BASE_URL, emailRegex, pswRegex, userTokenKey } from "../../config";
+import PageTemplate from "../../components/Admin/PageTemplate/PageTemplate";
+import { handleAxiosError } from "../../utils/handleAxiosErrors";
 
 const RegisterPage = () => {
   const [userEmail, setUserEmail] = useState("");

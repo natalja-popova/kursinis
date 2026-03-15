@@ -1,7 +1,7 @@
 import axios from "axios";
 import cookie from "js-cookie";
-import { API_BASE_URL, userTokenKey } from "@/config";
-import { handleAxiosError } from "@/utils/handleAxiosErrors";
+import { API_BASE_URL, userTokenKey } from "../config";
+import { handleAxiosError } from "../utils/handleAxiosErrors";
 
 export const validateJwt = async () => {
   const token = cookie.get(userTokenKey);
