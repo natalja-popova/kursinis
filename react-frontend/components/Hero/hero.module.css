@@ -1,4 +1,4 @@
-.heroBannerWarpper {
+.heroBannerWrapper {
   color: var(--heading-color-white);
   min-height: 80vh;
   height: fit-content;
@@ -12,6 +12,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  background-image: url("/imgSlider/Bacground-photo1.jpg");
   h2,
   h3 {
     color: var(--heading-color-white);

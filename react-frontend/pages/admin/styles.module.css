@@ -43,3 +43,7 @@
 .addImageVisible {
   display: block;
 }
+.smallSection {
+  width: 500px;
+  margin: auto;
+}

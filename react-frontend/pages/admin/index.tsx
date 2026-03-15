@@ -74,7 +74,7 @@ const AdminIndex = () => {
             placeholder="Įveskite slaptažodį"
           />
           {errorMsg && <p className="errorMsg">{errorMsg}</p>}
-          <button onClick={login} disabled={disableButton}>
+          <button className="btnCTA" onClick={login} disabled={disableButton}>
             Prisijungti
           </button>
         </div>
