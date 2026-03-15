@@ -10,7 +10,6 @@ const Courses = () => {
   >("CMAS1");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const openForm = (level: "CMAS1" | "CMAS2" | "CMAS3") => {
-    console.log("Here");
     setSelectedLevel(level);
     setIsModalOpen(true);
   };

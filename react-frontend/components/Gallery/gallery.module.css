@@ -28,6 +28,7 @@
   gap: 1rem;
   margin: auto;
   justify-content: center;
+  flex-wrap: wrap;
 }
 .albumLink {
   background-color: var(--button-background);
