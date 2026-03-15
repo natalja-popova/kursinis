@@ -9,7 +9,7 @@ import About from "@/components/About/About";
 
 import Courses from "@/components/Courses/Courses";
 import Medicine from "../components/About/Мedicine";
-import Gallery from "@/components/Gallery/Gallery";
+import Gallery from "../components/Gallery/Gallery";
 
 ReactModal.setAppElement("#__next"); // Next.js root
 
