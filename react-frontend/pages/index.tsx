@@ -5,9 +5,9 @@ import Hero from "@/components/Hero/Hero";
 import ReactModal from "react-modal";
 import Head from "next/head";
 
-import About from "@/components/About/About";
+import About from "../components/About/About";
 
-import Courses from "@/components/Courses/Courses";
+import Courses from "../components/Courses/Courses";
 import Medicine from "../components/About/Мedicine";
 import Gallery from "../components/Gallery/Gallery";
 

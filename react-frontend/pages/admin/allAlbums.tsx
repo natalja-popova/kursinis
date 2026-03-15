@@ -192,6 +192,7 @@ const AllAlbums = () => {
             Nepridėta jokių albumų. <br />
             <br />
             <button
+              className="btn"
               onClick={() => {
                 router.push("/admin/addAlbum");
               }}
