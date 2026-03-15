@@ -1,6 +1,6 @@
 import style from "./index.module.css";
 import Header from "../components/Header/Header";
-import Foooter from "../components/Footer/Foooter";
+import Footer from "../components/Footer/Footer";
 import Hero from "../components/Hero/Hero";
 import ReactModal from "react-modal";
 import Head from "next/head";
@@ -39,7 +39,7 @@ const HomePage = () => {
         <Gallery />
       </main>
 
-      <Foooter />
+      <Footer />
     </>
   );
 };

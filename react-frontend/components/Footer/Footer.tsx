@@ -1,6 +1,6 @@
 import style from "./footer.module.css";
 
-const Foooter = () => {
+const Footer = () => {
   return (
     <footer id="Kontaktai" className={style.footer}>
       <div>
@@ -29,4 +29,4 @@ const Foooter = () => {
   );
 };
 
-export default Foooter;
+export default Footer;

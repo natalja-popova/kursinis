@@ -8,12 +8,7 @@ import { handleAxiosError } from "../../utils/handleAxiosErrors";
 import PageTemplate from "../../components/Admin/PageTemplate/PageTemplate";
 import { API_BASE_URL } from "../../config";
 
-type Album = {
-  id: string;
-  albumName: string;
-  description?: string;
-  images: string[];
-};
+import { Album } from "../../types/album";
 
 const AllAlbums = () => {
   const router = useRouter();

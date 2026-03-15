@@ -5,20 +5,7 @@ import axios from "axios";
 import { API_BASE_URL } from "../../config";
 import style from "./gallery.module.css";
 import { handleAxiosError } from "../../utils/handleAxiosErrors";
-
-type Album = {
-  id: string;
-  albumName: string;
-  description?: string;
-  images: string[];
-};
-
-type GalleryItem = {
-  original: string;
-  thumbnail: string;
-  thumbnailClass: string;
-  thumbnailHeight: string;
-};
+import { Album, GalleryItem } from "../../types/album";
 
 const toGalleryItems = (images: string[]): GalleryItem[] =>
   images.map((img) => ({
