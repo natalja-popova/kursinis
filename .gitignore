@@ -2,7 +2,7 @@
 
 # dependencies
 node_modules/
-node-backend/Gallery/
+node-backend/gallery/
 /.pnp
 .pnp.*
 .yarn/*
