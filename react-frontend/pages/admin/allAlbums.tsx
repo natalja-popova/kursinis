@@ -44,6 +44,30 @@ const AllAlbums = () => {
         : [...selected, { album, image }];
     });
   };
+
+  const toggleSelectAll = (album: Album) => {
+    setSelectedImages((prev) => {
+      const allSelected = album.images.every((img) =>
+        prev.some(
+          (item) => item.album === album.albumName && item.image === img,
+        ),
+      );
+
+      if (allSelected) {
+        return prev.filter((item) => item.album !== album.albumName);
+      }
+
+      const newSelections = album.images.map((img) => ({
+        album: album.albumName,
+        image: img,
+      }));
+
+      return [
+        ...prev.filter((item) => item.album !== album.albumName),
+        ...newSelections,
+      ];
+    });
+  };
   const toggleAddImages = (id: string) => {
     setOpenAlbums((prev) => ({
       ...prev,
@@ -107,6 +131,7 @@ const AllAlbums = () => {
             <div key={album.id} className={style.albumWarpper}>
               <div className={style.ctaHeaderWarpper}>
                 <h3>{album.albumName}</h3>
+
                 <div className={style.ctaWarpper}>
                   <button className="btnDanger" onClick={removePhotos}>
                     Ištrinti nuotraukas
@@ -150,6 +175,24 @@ const AllAlbums = () => {
                   }}
                 />
               </div>
+              {album.images.length > 0 && (
+                <div className={style.selectAllWrapper}>
+                  <label>
+                    <input
+                      type="checkbox"
+                      checked={album.images.every((img) =>
+                        selectedImages.some(
+                          (item) =>
+                            item.album === album.albumName &&
+                            item.image === img,
+                        ),
+                      )}
+                      onChange={() => toggleSelectAll(album)}
+                    />
+                    &nbsp;Pasirinkti visas nuotraukas
+                  </label>
+                </div>
+              )}
               <div className={style.imagesWrapper}>
                 {album.images.map((image) => {
                   const imagePath = `${API_BASE_URL}${image}`;
