@@ -128,11 +128,11 @@ const AllAlbums = () => {
         {errorMsg && <p className="errorMsg">{errorMsg}</p>}
         {albums.length > 0 ? (
           albums.map((album) => (
-            <div key={album.id} className={style.albumWarpper}>
-              <div className={style.ctaHeaderWarpper}>
+            <div key={album.id} className={style.albumWrapper}>
+              <div className={style.ctaHeaderWrapper}>
                 <h3>{album.albumName}</h3>
 
-                <div className={style.ctaWarpper}>
+                <div className={style.ctaWrapper}>
                   <button className="btnDanger" onClick={removePhotos}>
                     Ištrinti nuotraukas
                   </button>

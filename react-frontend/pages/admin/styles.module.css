@@ -7,18 +7,18 @@
   flex-wrap: wrap;
   gap: 1rem;
 }
-.ctaHeaderWarpper {
+.ctaHeaderWrapper {
   display: flex;
   justify-content: space-between;
   margin-bottom: 1rem;
   flex-wrap: wrap;
 }
-.albumWarpper {
+.albumWrapper {
   display: flex;
   flex-direction: column;
   margin-bottom: 5rem;
 }
-.ctaWarpper {
+.ctaWrapper {
   display: flex;
   gap: 1rem;
 }

@@ -49,7 +49,7 @@ const RegistrationForm = ({
 
   return (
     <div>
-      <div className={style.headerWarpper}>
+      <div className={style.headerWrapper}>
         <h3>Registracija</h3>
         <button className={`btn ${style.closeModal}`} onClick={onClose}>
           X
@@ -87,7 +87,7 @@ const RegistrationForm = ({
             {errMsg && <p className="errorMsg">{errMsg}</p>}
             <label>pasirinkti kursą:</label>
 
-            <div className={style.radioButtonsWarapper}>
+            <div className={style.radioButtonsWrapper}>
               <div className={style.radioButton}>
                 <label>
                   <input

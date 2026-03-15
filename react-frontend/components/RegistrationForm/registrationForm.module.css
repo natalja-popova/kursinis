@@ -1,4 +1,4 @@
-.radioButtonsWarapper {
+.radioButtonsWrapper {
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -41,7 +41,7 @@
     font-size: 14px;
   }
 }
-.headerWarpper {
+.headerWrapper {
   display: flex;
   justify-content: space-between;
   align-items: center;
