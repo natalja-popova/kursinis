@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import style from "./addImages.module.css";
 import { handleAxiosError } from "../../../utils/handleAxiosErrors";
 import { API_BASE_URL, userTokenKey } from "../../../config";
+import { redirectIfSessionExpired } from "@/services/authService";
 
 type AddImagesProps = {
   aName: string;
@@ -28,8 +29,6 @@ const AddImages = ({
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const router = useRouter();
 
-  const token = cookie.get(userTokenKey);
-
   const handleImages = (e: ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return;
     setImages(Array.from(e.target.files));
@@ -49,6 +48,7 @@ const AddImages = ({
     });
 
     try {
+      const token = cookie.get(userTokenKey);
       await axios.post(`${API_BASE_URL}/uploads`, imgData, {
         headers: {
           "Content-Type": "multipart/form-data",
@@ -70,7 +70,7 @@ const AddImages = ({
       }
     } catch (error) {
       if (String(error).toLowerCase().includes("401")) {
-        router.push("/admin?reason=unauthorized");
+        redirectIfSessionExpired(router);
       }
       setUploadMessage(handleAxiosError(error));
     }

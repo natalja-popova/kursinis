@@ -10,6 +10,7 @@ import PageTemplate from "../../components/Admin/PageTemplate/PageTemplate";
 import { API_BASE_URL, userTokenKey } from "../../config";
 
 import { Album } from "../../types/album";
+import { redirectIfSessionExpired } from "@/services/authService";
 
 const AllAlbums = () => {
   const router = useRouter();
@@ -107,7 +108,9 @@ const AllAlbums = () => {
       setSelectedImages([]);
     } catch (error) {
       if (String(error).toLowerCase().includes("401")) {
-        router.push(`/admin?reason=unauthorized`);
+        {
+          redirectIfSessionExpired(router);
+        }
       }
 
       setErrMsg(handleAxiosError(error));
@@ -129,7 +132,9 @@ const AllAlbums = () => {
       await fetchAlbums();
     } catch (error) {
       if (String(error).toLowerCase().includes("401")) {
-        router.push(`/admin?reason=unauthorized`);
+        {
+          redirectIfSessionExpired(router);
+        }
       }
       setErrMsg(handleAxiosError(error));
     }

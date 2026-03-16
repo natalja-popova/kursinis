@@ -1,5 +1,7 @@
 import axios from "axios";
 import cookie from "js-cookie";
+import { NextRouter } from "next/router";
+
 import { API_BASE_URL, userTokenKey } from "../config";
 import { handleAxiosError } from "../utils/handleAxiosErrors";
 
@@ -20,4 +22,8 @@ export const validateJwt = async () => {
     handleAxiosError(error);
     return false;
   }
+};
+
+export const redirectIfSessionExpired = (router: NextRouter) => {
+  router.push(`/admin?reason=unauthorized`);
 };
