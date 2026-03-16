@@ -10,7 +10,7 @@ import PageTemplate from "../../components/Admin/PageTemplate/PageTemplate";
 import { API_BASE_URL, userTokenKey } from "../../config";
 
 import { Album } from "../../types/album";
-import { redirectIfSessionExpired } from "@/services/authService";
+import { redirectIfSessionExpired } from "../../services/authService";
 
 const AllAlbums = () => {
   const router = useRouter();

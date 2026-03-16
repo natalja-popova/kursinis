@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import style from "./addImages.module.css";
 import { handleAxiosError } from "../../../utils/handleAxiosErrors";
 import { API_BASE_URL, userTokenKey } from "../../../config";
-import { redirectIfSessionExpired } from "@/services/authService";
+import { redirectIfSessionExpired } from "../../../services/authService";
 
 type AddImagesProps = {
   aName: string;
