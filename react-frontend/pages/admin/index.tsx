@@ -42,11 +42,18 @@ const AdminIndex = () => {
     }
   };
   useEffect(() => {
+    if (!router.isReady) return;
+    const reason = router.query.reason;
+    if (reason === "unauthorized") {
+      setErrMsg("Sesija baigėsi. Prisijunkite iš naujo.");
+    }
+  }, [router.isReady, router.query]);
+  useEffect(() => {
     const run = async () => {
       const isValid = await validateJwt();
 
       if (isValid) {
-        router.push("/admin/gallery");
+        router.push("/admin/allAlbums");
         return;
       }
     };

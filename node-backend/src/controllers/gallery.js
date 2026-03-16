@@ -60,7 +60,6 @@ export const deleteImages = async (req, res) => {
   try {
     for (const item of images) {
       const { album, image } = item;
-      console.log("item", item, "album=", album, "image", image);
 
       const fileName = image.split("/").pop();
 

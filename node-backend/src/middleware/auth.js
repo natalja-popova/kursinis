@@ -2,7 +2,6 @@ import jwt from "jsonwebtoken";
 
 const authAdmin = (req, res, next) => {
   const token = req.headers.authorization;
-
   if (!token) {
     return res.status(401).json({ message: "Bad auth (no token)" });
   }

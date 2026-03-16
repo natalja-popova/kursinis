@@ -1,12 +1,13 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import cookie from "js-cookie";
 
 import style from "./styles.module.css";
 import AddImages from "../../components/Admin/AddImages/AddImages";
 import { handleAxiosError } from "../../utils/handleAxiosErrors";
 import PageTemplate from "../../components/Admin/PageTemplate/PageTemplate";
-import { API_BASE_URL } from "../../config";
+import { API_BASE_URL, userTokenKey } from "../../config";
 
 import { Album } from "../../types/album";
 
@@ -94,13 +95,21 @@ const AllAlbums = () => {
       return;
     }
     try {
+      const token = cookie.get(userTokenKey);
       await axios.delete(`${API_BASE_URL}/deleteImages`, {
         data: { images: selectedImages },
+        headers: {
+          Authorization: token,
+        },
       });
 
       await fetchAlbums();
       setSelectedImages([]);
     } catch (error) {
+      if (String(error).toLowerCase().includes("401")) {
+        router.push(`/admin?reason=unauthorized`);
+      }
+
       setErrMsg(handleAxiosError(error));
     }
   };
@@ -111,9 +120,17 @@ const AllAlbums = () => {
       return;
     }
     try {
-      await axios.delete(`${API_BASE_URL}/deleteAlbum/${name}`);
+      const token = cookie.get(userTokenKey);
+      await axios.delete(`${API_BASE_URL}/deleteAlbum/${name}`, {
+        headers: {
+          Authorization: token,
+        },
+      });
       await fetchAlbums();
     } catch (error) {
+      if (String(error).toLowerCase().includes("401")) {
+        router.push(`/admin?reason=unauthorized`);
+      }
       setErrMsg(handleAxiosError(error));
     }
   };

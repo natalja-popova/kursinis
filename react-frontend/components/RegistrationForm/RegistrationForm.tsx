@@ -39,7 +39,6 @@ const RegistrationForm = ({
       });
       if (res.status === 200) {
         setSendStatus(res.data.message);
-        console.log("res.data.mesage", res.data);
         setHideForm(true);
       }
     } catch (error) {

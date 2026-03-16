@@ -5,7 +5,6 @@ import AdminModel from "../models/admin.js";
 
 export const adminLogin = async (req, res) => {
   const data = req.body;
-  console.log("data", data);
   if (!data) {
     return res.status(401).json({ error: "Nera duomenu" });
   }

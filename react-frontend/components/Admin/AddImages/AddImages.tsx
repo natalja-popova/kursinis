@@ -1,8 +1,11 @@
 import { ChangeEvent, useRef, useState } from "react";
 import axios from "axios";
+import cookie from "js-cookie";
+import { useRouter } from "next/router";
+
 import style from "./addImages.module.css";
 import { handleAxiosError } from "../../../utils/handleAxiosErrors";
-import { API_BASE_URL } from "../../../config";
+import { API_BASE_URL, userTokenKey } from "../../../config";
 
 type AddImagesProps = {
   aName: string;
@@ -23,6 +26,9 @@ const AddImages = ({
 
   const [uploadMessage, setUploadMessage] = useState("");
   const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const router = useRouter();
+
+  const token = cookie.get(userTokenKey);
 
   const handleImages = (e: ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return;
@@ -44,7 +50,10 @@ const AddImages = ({
 
     try {
       await axios.post(`${API_BASE_URL}/uploads`, imgData, {
-        headers: { "Content-Type": "multipart/form-data" },
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: token,
+        },
       });
       setUploadMessage("Albumas sekmingai pridėtas");
       if (clearInputs) {
@@ -60,6 +69,9 @@ const AddImages = ({
         fileInputRef.current.value = "";
       }
     } catch (error) {
+      if (String(error).toLowerCase().includes("401")) {
+        router.push("/admin?reason=unauthorized");
+      }
       setUploadMessage(handleAxiosError(error));
     }
   };
