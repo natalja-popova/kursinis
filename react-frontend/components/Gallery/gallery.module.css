@@ -1,5 +1,5 @@
 .gallery {
-  color: black;
+  color: var(--text-color-main);
   margin-top: 20px;
   h3,
   p {
@@ -12,6 +12,8 @@
   max-width: var(--max-width);
   width: 100%;
   margin: 0 auto; /* center the whole section horizontally */
+  background-color: var(--section-background-3);
+  color: var(--text-color-main);
 }
 .galleryWrapper h2 {
   margin: auto;

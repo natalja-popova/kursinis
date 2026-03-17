@@ -1,6 +1,6 @@
 .heroBannerWrapper {
   color: var(--heading-color-white);
-  min-height: 80vh;
+  min-height: 86vh;
   height: fit-content;
   text-shadow:
     0 0 3px rgba(0, 0, 0, 0.9),
@@ -9,20 +9,78 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: grid;
+  place-items: center;
+  position: relative;
+  isolation: isolate;
   background-image: url("/imgSlider/Bacground-photo1.jpg");
   h2,
   h3 {
     color: var(--heading-color-white);
   }
 }
+
+.heroBannerWrapper::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(3, 25, 39, 0.35) 0%,
+      rgba(3, 25, 39, 0.85) 75%
+    ),
+    radial-gradient(
+      900px 500px at 20% 20%,
+      rgba(56, 189, 248, 0.22),
+      transparent 60%
+    );
+}
 .textWrapper {
   display: flex;
   flex-direction: column;
-  gap: 3rem;
-  max-width: 90ch;
+  gap: 1.25rem;
+  max-width: 92ch;
   width: 100%;
   padding: 0 1rem;
+}
+
+.actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-top: 0.75rem;
+}
+
+.primaryBtn,
+.secondaryBtn {
+  border-radius: 999px;
+  padding: 0.85rem 1.15rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.primaryBtn {
+  background-color: var(--button-CTA-background);
+  color: #ffffff;
+}
+
+.primaryBtn:hover {
+  background-color: var(--button-CTA-background-hover);
+}
+
+.secondaryBtn {
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(10px);
+}
+
+.secondaryBtn:hover {
+  background: rgba(255, 255, 255, 0.14);
 }

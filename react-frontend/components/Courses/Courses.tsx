@@ -3,18 +3,24 @@ import { useState } from "react";
 import RegistrationForm from "../RegistrationForm/RegistrationForm";
 import style from "./courses.module.css";
 import CourseCard from "./CoursesCard";
+import { useInViewAnimation } from "../../hooks/useInViewAnimation";
 
 const Courses = () => {
   const [selectedLevel, setSelectedLevel] = useState<
     "CMAS1" | "CMAS2" | "CMAS3"
   >("CMAS1");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { ref, inView } = useInViewAnimation<HTMLElement>();
   const openForm = (level: "CMAS1" | "CMAS2" | "CMAS3") => {
     setSelectedLevel(level);
     setIsModalOpen(true);
   };
   return (
-    <section id="Mokymai" className={style.sectionWrapper}>
+    <section
+      ref={ref}
+      id="Mokymai"
+      className={`${style.sectionWrapper} reveal ${inView ? "revealIn" : ""}`}
+    >
       <h2> Nardymo kursai</h2>
       <div className={style.contentWrapper}>
         <div className={style.coursesWrapper}>

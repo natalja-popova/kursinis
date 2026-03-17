@@ -4,4 +4,36 @@
   flex-direction: column;
   justify-content: flex-start;
   color: var(--text-color-main);
+
+  /* clean scuba palette background (light) */
+  background:
+    radial-gradient(
+      900px 500px at 10% 0%,
+      rgba(56, 189, 248, 0.16),
+      transparent 55%
+    ),
+    radial-gradient(
+      800px 420px at 90% 10%,
+      rgba(15, 123, 181, 0.10),
+      transparent 60%
+    ),
+    linear-gradient(180deg, #ffffff 0%, #e5f3ff 40%, #ffffff 100%);
+}
+
+/* consistent vertical rhythm for all sections */
+.main :global(section) {
+  width: 100%;
+  padding: clamp(2.5rem, 5vw, 5rem) 1rem;
+}
+
+/* anchors scroll nicely under your tall header */
+.main :global(section[id]),
+.main :global(footer[id]) {
+  scroll-margin-top: 160px;
+}
+
+/* nicer default heading spacing */
+.main :global(h2) {
+  margin: 0 0 1.25rem;
+  letter-spacing: 0.02em;
 }

@@ -10,6 +10,7 @@
   h2 {
     text-align: center;
   }
+  background-color: var(--section-background-3);
 }
 .textWrapper {
   display: flex;

@@ -1,9 +1,15 @@
 import style from "./about.module.css";
 import Image from "next/image";
+import { useInViewAnimation } from "../../hooks/useInViewAnimation";
 
 const Medicine = () => {
+  const { ref, inView } = useInViewAnimation<HTMLElement>();
+
   return (
-    <section className={style.medicine}>
+    <section
+      ref={ref}
+      className={`${style.medicine} reveal ${inView ? "revealIn" : ""}`}
+    >
       <h2> Nardymo gydytoja </h2>
       <div className={style.contentWrapper}>
         <Image

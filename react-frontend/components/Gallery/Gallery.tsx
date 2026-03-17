@@ -6,6 +6,7 @@ import { API_BASE_URL } from "../../config";
 import style from "./gallery.module.css";
 import { handleAxiosError } from "../../utils/handleAxiosErrors";
 import { Album, GalleryItem } from "../../types/album";
+import { useInViewAnimation } from "../../hooks/useInViewAnimation";
 
 const toGalleryItems = (images: string[]): GalleryItem[] =>
   images.map((img) => ({
@@ -20,6 +21,7 @@ const Gallery = () => {
   const [albums, setAlbums] = useState<Album[]>([]);
   const [selectedAlbumId, setSelectedAlbumId] = useState<string | null>(null);
   const [errorMsg, setErrMsg] = useState("");
+  const { ref, inView } = useInViewAnimation<HTMLElement>();
 
   useEffect(() => {
     const fetchAlbums = async () => {
@@ -42,7 +44,11 @@ const Gallery = () => {
   const items = selectedAlbum ? toGalleryItems(selectedAlbum.images) : [];
 
   return (
-    <section id="Galerija" className={style.galleryWrapper}>
+    <section
+      ref={ref}
+      id="Galerija"
+      className={`${style.galleryWrapper} reveal ${inView ? "revealIn" : ""}`}
+    >
       <h2>Galerija</h2>
       {errorMsg && <p className="errorMsg">{errorMsg}</p>}
       {/* Album list as links/buttons */}

@@ -6,15 +6,17 @@
   --footer-background: #0b1120;
   --header-background: #0b1120;
   --overlay-color: #0b1120;
-  --button-background-hover: #22c55e;
-  --button-background: #4ade80;
+
+  /* palette */
+  --section-background-1: #e5f3ff;
+  --section-background-2: #d1fae5;
+  --section-background-3: #ffffff;
+  --button-background: #0f7bb5;
+  --button-background-hover: #38bdf8;
   --button-CTA-background: #0f7bb5;
   --button-CTA-background-hover: #38bdf8;
   --link-color: #0f7bb5;
   --link-hover-color: #38bdf8;
-  --section-background-1: #e5f3ff;
-  --section-background-2: #d1fae5;
-  --section-background-3: #ffffff;
   --heading-color: #0b1120;
   --heading-color-white: #ffffff;
   --hero-cards-text-color: white;
@@ -51,6 +53,8 @@ body {
   font-family: "Inter", Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: var(--background);
+  color: var(--text-color-main);
 }
 #__next {
   display: flex;
@@ -130,6 +134,27 @@ p {
 }
 section {
   padding: clamp(2rem, 6vw, 4rem) 1rem;
+}
+.reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 600ms ease,
+    transform 600ms ease;
+  will-change: opacity, transform;
+}
+
+.revealIn {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }
 .errorMsg {
   font-weight: bold;

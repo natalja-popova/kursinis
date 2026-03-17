@@ -1,9 +1,16 @@
 import style from "./about.module.css";
 import Image from "next/image";
+import { useInViewAnimation } from "../../hooks/useInViewAnimation";
 
 const About = () => {
+  const { ref, inView } = useInViewAnimation<HTMLElement>();
+
   return (
-    <section id="Apie" className={style.about}>
+    <section
+      ref={ref}
+      id="Apie"
+      className={`${style.about} reveal ${inView ? "revealIn" : ""}`}
+    >
       <h2>Apie Mus</h2>
       <div className={style.contentWrapper}>
         <div className={style.textWrapper}>

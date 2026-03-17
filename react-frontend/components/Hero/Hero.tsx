@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import style from "./hero.module.css";
 const images = [
   { url: "/imgSlider/Bacground-photo2.jpg" },
@@ -17,7 +18,7 @@ const Hero = () => {
   return (
     <section
       className={style.heroBannerWrapper}
-      // style={{ backgroundImage: `url(${bg.url})` }}
+      style={{ backgroundImage: `url(${bg.url})` }}
     >
       <div className={style.textWrapper}>
         <h2 className="h3">
@@ -30,6 +31,15 @@ const Hero = () => {
           Atrask krištolo skaidrumo rifus, įspūdingą povandeninį pasaulį ir
           keliones, kurios įkvepia.
         </h3>
+
+        <div className={style.actions}>
+          <Link className={style.primaryBtn} href="#Mokymai">
+            Peržiūrėti kursus
+          </Link>
+          <Link className={style.secondaryBtn} href="#Kontaktai">
+            Susisiekti
+          </Link>
+        </div>
       </div>
     </section>
   );
